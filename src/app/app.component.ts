@@ -8,11 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app works!';
-  text:any;
 
   file: File;
   onChange(event: EventTarget) {
-
+    this.file = null;
+    alert("starts to read");
+    let text = "";
     let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
     let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
     let files: FileList = target.files;
@@ -22,8 +23,9 @@ export class AppComponent {
     let reader = new FileReader();
     reader.onload = file => {
       let contents: any = file.target;
-      this.text = contents.result;
-      alert(this.text);
+      text = contents.result;
+      alert(text);
+      console.log(text);
     }
     reader.readAsText(this.file);
 
