@@ -3,6 +3,9 @@
 </h1>
 <div>
 
-  <input type="file" name="file" id="file" class="inputfile" (change)="onChange($event)"/>
-<label for="file" >Choose a file</label>
+  <input type="file" name="file" id="file" class="inputfile" (change)="onChange($event)" (click)="onClick($event)"/>
+  <label for="file">Choose a file</label>
+<!--
+  <input type="file" name="file" id="file" class="inputfile" (change)="triggerFile($event.target)" />
+  <label for="file">Choose a file</label> -->
 </div>

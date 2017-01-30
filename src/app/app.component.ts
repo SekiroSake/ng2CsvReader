@@ -9,28 +9,88 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app works!';
 
-  file: File;
+
   onChange(event: EventTarget) {
-    this.file = null;
+    let file: File = null;
     alert("starts to read");
     let text = "";
+
+
     let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
+
+
     let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
+
+
     let files: FileList = target.files;
-    this.file = files[0];
-    alert(this.file.name);
+
+
+    file = files[0];
+    alert(file.name);
+
+
+
 
     let reader = new FileReader();
+
+    alert("starts to read2");
+
+    // reader.readAsArrayBuffer(this.file)
+
     reader.onload = file => {
+      alert("starts to read5");
       let contents: any = file.target;
+      alert(contents);
       text = contents.result;
       alert(text);
       console.log(text);
     }
-    reader.readAsText(this.file);
+    alert("starts to read3");
+    reader.readAsText(file);
+    alert("starts to read4");
+
 
 
   }
+  onClick(event: EventTarget) {
+    let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
+
+
+    let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
+
+    target.value = null
+  }
+
+
+
+  triggerFile(inputValue: any) {
+    var file: File = inputValue.files[0];
+    var myReader: FileReader = new FileReader();
+
+    myReader.onloadend = function(e) {
+      // you can perform an action with readed data here
+      console.log(myReader.result);
+      let text = myReader.result;
+      alert(text);
+    }
+
+    myReader.readAsText(file);
+
+  }
+  // do something
+  //
+  // this.file =fileInput;
+  //   alert(this.file.name);
+  //     let reader = new FileReader();
+  //     reader.onload = file => {
+  //       let contents: any = file.target;
+  //       text = contents.result;
+  //       alert(text);
+  //       console.log(text);
+  //
+  //     }
+  //     reader.readAsText(this.file);
+  // }
 
   doAnythingWithFile() {
   }
